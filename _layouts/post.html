@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ page.title }} — Sharan Salian</title>
+  <meta property="og:title" content="{{ page.title }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  {% if page.image %}<meta property="og:image" content="{{ page.image }}" />{% endif %}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ page.title }}" />
+  {% if page.image %}<meta name="twitter:image" content="{{ page.image }}" />{% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -51,6 +58,52 @@
       border-left: 3px solid #e3e2de; padding-left: 1rem; color: #787774;
       margin: 1rem 0;
     }
+    /* Post engagement bar */
+    .post-engagement {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 0; margin-top: 2rem;
+      border-top: 1px solid #e3e2de; border-bottom: 1px solid #e3e2de;
+    }
+    .post-like-btn {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      background: none; border: 1px solid #e3e2de; border-radius: 20px;
+      padding: 0.375rem 0.875rem; cursor: pointer; font-size: 0.875rem;
+      color: #37352f; transition: all 0.2s; font-family: inherit;
+    }
+    .post-like-btn:hover { border-color: #e74c3c; color: #e74c3c; background: #fef2f2; }
+    .post-like-btn.liked { border-color: #e74c3c; color: #e74c3c; background: #fef2f2; }
+    .post-like-btn .heart { font-size: 1rem; line-height: 1; }
+    .post-like-count { font-weight: 600; font-size: 0.8125rem; }
+    .post-share-group { display: flex; align-items: center; gap: 0.375rem; }
+    .post-share-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2rem; height: 2rem; border-radius: 50%;
+      border: 1px solid #e3e2de; background: none; cursor: pointer;
+      font-size: 0.75rem; font-weight: 700; color: #37352f;
+      transition: all 0.2s; text-decoration: none; font-family: inherit;
+    }
+    .post-share-btn:hover { background: #f7f6f3; border-color: #9b9a97; }
+    .post-share-btn.twitter:hover { background: #e8f5fd; border-color: #1d9bf0; color: #1d9bf0; }
+    .post-share-btn.linkedin:hover { background: #e8f0fe; border-color: #0a66c2; color: #0a66c2; }
+    .post-share-btn.copy:hover { background: #f0fdf4; border-color: #059669; color: #059669; }
+    .copy-toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      background: #37352f; color: #fff; padding: 0.5rem 1rem; border-radius: 6px;
+      font-size: 0.8125rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    }
+    .copy-toast.show { opacity: 1; }
+    /* Author footer */
+    .post-author {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-top: 2rem; padding: 1.25rem; background: #f7f6f3; border-radius: 8px;
+    }
+    .post-author-avatar {
+      width: 40px; height: 40px; border-radius: 50%; background: #2eaadc;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff; font-size: 1rem; flex-shrink: 0;
+    }
+    .post-author-name { font-weight: 600; font-size: 0.875rem; }
+    .post-author-bio { font-size: 0.8125rem; color: #787774; margin-top: 0.125rem; }
   </style>
 </head>
 <body>
@@ -64,13 +117,84 @@
     <div class="content">
       {{ content }}
     </div>
+
+    <div class="post-engagement">
+      <button class="post-like-btn" id="likeBtn" onclick="handleLike()">
+        <span class="heart" id="heartIcon">&#9825;</span>
+        <span class="post-like-count" id="likeCount">0</span>
+      </button>
+      <div class="post-share-group">
+        <a class="post-share-btn twitter" id="twitterShare" href="#" target="_blank" rel="noopener" title="Share on Twitter">T</a>
+        <a class="post-share-btn linkedin" id="linkedinShare" href="#" target="_blank" rel="noopener" title="Share on LinkedIn">in</a>
+        <button class="post-share-btn copy" onclick="copyLink()" title="Copy link">&#128279;</button>
+      </div>
+    </div>
+
+    <div class="post-author">
+      <div class="post-author-avatar">S</div>
+      <div>
+        <div class="post-author-name">Sharan Salian</div>
+        <div class="post-author-bio">Software engineer building AI tools, studying system design, shipping in public.</div>
+      </div>
+    </div>
   </div>
+
+  <div class="copy-toast" id="copyToast">Link copied</div>
+
   <script>
     (function() {
       var slug = location.pathname.replace(/^\//,'').replace(/\/$/,'').split('/').pop();
+      var API = 'https://us-central1-sharan-os-core.cloudfunctions.net';
+      var title = document.querySelector('h1').textContent;
+      var url = location.href;
+
+      // Share links
+      document.getElementById('twitterShare').href =
+        'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title + '\n\n' + url);
+      document.getElementById('linkedinShare').href =
+        'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+
+      // Page hit
       if (slug) {
-        fetch('https://us-central1-sharan-os-core.cloudfunctions.net/trackPageHit?slug=' + encodeURIComponent(slug), { mode: 'no-cors' }).catch(function(){});
+        fetch(API + '/trackPageHit?slug=' + encodeURIComponent(slug), { mode: 'no-cors' }).catch(function(){});
       }
+
+      // Likes
+      var liked = localStorage.getItem('liked_' + slug);
+      if (slug) {
+        fetch(API + '/likePost?slug=' + encodeURIComponent(slug))
+          .then(function(r) { return r.json(); })
+          .then(function(d) {
+            document.getElementById('likeCount').textContent = d.likes || 0;
+            if (liked) {
+              document.getElementById('likeBtn').classList.add('liked');
+              document.getElementById('heartIcon').innerHTML = '&#9829;';
+            }
+          }).catch(function(){});
+      }
+
+      window.handleLike = function() {
+        if (liked) return;
+        localStorage.setItem('liked_' + slug, '1');
+        liked = '1';
+        document.getElementById('likeBtn').classList.add('liked');
+        document.getElementById('heartIcon').innerHTML = '&#9829;';
+        var cur = parseInt(document.getElementById('likeCount').textContent) || 0;
+        document.getElementById('likeCount').textContent = cur + 1;
+        fetch(API + '/likePost', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug: slug })
+        }).catch(function(){});
+      };
+
+      window.copyLink = function() {
+        navigator.clipboard.writeText(url).then(function() {
+          var toast = document.getElementById('copyToast');
+          toast.classList.add('show');
+          setTimeout(function() { toast.classList.remove('show'); }, 2000);
+        });
+      };
     })();
   </script>
 </body>
