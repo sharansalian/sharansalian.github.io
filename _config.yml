@@ -1,0 +1,7 @@
+title: Sharan Salian
+description: Engineering, AI, and building in public.
+url: "https://sharansalian.github.io"
+markdown: kramdown
+permalink: /:title/
+plugins:
+  - jekyll-seo-tag
