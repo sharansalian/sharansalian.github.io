@@ -5,3 +5,6 @@ markdown: kramdown
 permalink: /:title/
 plugins:
   - jekyll-seo-tag
+author:
+  name: Sharan Salian
+  bio: Software engineer building AI tools, studying system design, shipping in public.
