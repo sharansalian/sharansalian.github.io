@@ -140,22 +140,39 @@
       var title = document.querySelector('h1').textContent;
       var url = location.href;
 
-      document.getElementById('twitterShare').href =
-        'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title + '\n\n' + url);
-      document.getElementById('linkedinShare').href =
-        'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+      // Share links + tracking
+      var twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title + '\n\n' + url);
+      var linkedinUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+      document.getElementById('twitterShare').href = twitterUrl;
+      document.getElementById('linkedinShare').href = linkedinUrl;
 
+      document.getElementById('twitterShare').addEventListener('click', function() {
+        fetch(API + '/trackShare', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug: slug, platform: 'twitter' })
+        }).catch(function(){});
+      });
+      document.getElementById('linkedinShare').addEventListener('click', function() {
+        fetch(API + '/trackShare', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug: slug, platform: 'linkedin' })
+        }).catch(function(){});
+      });
+
+      // Page hit (unique by IP, server-side)
       if (slug) {
         fetch(API + '/trackPageHit?slug=' + encodeURIComponent(slug), { mode: 'no-cors' }).catch(function(){});
       }
 
-      var liked = localStorage.getItem('liked_' + slug);
+      // Likes (unique by IP, server-side)
+      var liked = false;
       if (slug) {
         fetch(API + '/likePost?slug=' + encodeURIComponent(slug))
           .then(function(r) { return r.json(); })
           .then(function(d) {
             document.getElementById('likeCount').textContent = d.likes || 0;
-            if (liked) {
+            if (d.liked) {
+              liked = true;
               document.getElementById('likeBtn').classList.add('liked');
               document.getElementById('heartIcon').innerHTML = '&#9829;';
             }
@@ -164,8 +181,7 @@
 
       window.handleLike = function() {
         if (liked) return;
-        localStorage.setItem('liked_' + slug, '1');
-        liked = '1';
+        liked = true;
         document.getElementById('likeBtn').classList.add('liked');
         document.getElementById('heartIcon').innerHTML = '&#9829;';
         var cur = parseInt(document.getElementById('likeCount').textContent) || 0;
@@ -174,11 +190,20 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ slug: slug })
-        }).catch(function(){});
+        }).then(function(r) { return r.json(); })
+          .then(function(d) {
+            if (d.alreadyLiked) {
+              document.getElementById('likeCount').textContent = d.likes || cur;
+            }
+          }).catch(function(){});
       };
 
       window.copyLink = function() {
         navigator.clipboard.writeText(url).then(function() {
+          fetch(API + '/trackShare', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug: slug, platform: 'copy' })
+          }).catch(function(){});
           var toast = document.getElementById('copyToast');
           toast.classList.add('show');
           setTimeout(function() { toast.classList.remove('show'); }, 2000);
