@@ -1,4 +1,3 @@
-<!-- Updated layout - synced from sharan-os-core -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,113 +13,100 @@
   {% if page.image %}<meta name="twitter:image" content="{{ page.image }}" />{% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Google Sans Text', 'Google Sans', -apple-system, sans-serif;
-      background: #fff; color: #37352f; line-height: 1.7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff; color: #333; line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 680px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .container { max-width: 640px; margin: 0 auto; padding: 3rem 1.5rem; }
     .back {
-      display: inline-block; color: #9b9a97; text-decoration: none;
-      font-size: 0.8125rem; margin-bottom: 2rem; transition: color 0.15s;
+      display: inline-block; color: #aaa; text-decoration: none;
+      font-size: 0.85rem; margin-bottom: 2.5rem; transition: color 0.15s;
     }
-    .back:hover { color: #37352f; }
+    .back:hover { color: #333; }
+    .byline {
+      font-size: 0.85rem; color: #888; margin-bottom: 0.5rem;
+    }
+    .byline a { color: #555; text-decoration: none; font-weight: 500; }
+    .byline a:hover { color: #111; }
     h1 {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em;
+      font-size: 1.6rem; font-weight: 600; color: #111;
+      letter-spacing: -0.02em; line-height: 1.35;
       margin-bottom: 0.25rem;
     }
-    .meta { color: #9b9a97; font-size: 0.8125rem; margin-bottom: 1.5rem; }
-    /* Author byline - top of post */
-    .post-author-byline {
-      display: flex; align-items: center; gap: 0.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .post-author-avatar {
-      width: 28px; height: 28px; border-radius: 50%; background: #2eaadc;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: #fff; font-size: 0.75rem; flex-shrink: 0;
-    }
-    .post-author-avatar img {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
-    }
-    .post-author-name { font-weight: 600; font-size: 0.875rem; }
+    .meta { color: #aaa; font-size: 0.8rem; margin-bottom: 2rem; }
     .post-banner {
       width: 100%; max-height: 400px; object-fit: cover;
-      border-radius: 8px; margin-bottom: 2rem;
+      border-radius: 6px; margin-bottom: 2rem;
     }
-    .content h2 { font-family: 'Google Sans', sans-serif; font-size: 1.25rem; font-weight: 600; margin: 1.75rem 0 0.5rem; }
-    .content h3 { font-family: 'Google Sans', sans-serif; font-size: 1.0625rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    .content h2 { font-size: 1.2rem; font-weight: 600; color: #111; margin: 2rem 0 0.5rem; }
+    .content h3 { font-size: 1.05rem; font-weight: 600; color: #222; margin: 1.75rem 0 0.5rem; }
     .content p { margin-bottom: 1rem; }
     .content ul, .content ol { margin: 0 0 1rem 1.25rem; }
     .content li { margin-bottom: 0.25rem; }
     .content code {
-      background: #f7f6f3; padding: 0.125rem 0.375rem; border-radius: 4px;
+      background: #f6f6f6; padding: 0.125rem 0.375rem; border-radius: 3px;
       font-size: 0.875rem;
     }
     .content pre {
-      background: #f7f6f3; border: 1px solid #e3e2de; border-radius: 8px;
+      background: #f6f6f6; border: 1px solid #eee; border-radius: 6px;
       padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-size: 0.8125rem;
       line-height: 1.6;
     }
     .content pre code { background: none; padding: 0; }
-    .content a { color: #2eaadc; text-decoration: none; }
+    .content a { color: #0969da; text-decoration: none; }
     .content a:hover { text-decoration: underline; }
     .content blockquote {
-      border-left: 3px solid #e3e2de; padding-left: 1rem; color: #787774;
+      border-left: 3px solid #e5e5e5; padding-left: 1rem; color: #666;
       margin: 1rem 0;
     }
-    /* Post engagement bar */
-    .post-engagement {
+    .content img { max-width: 100%; border-radius: 6px; margin: 0.5rem 0; }
+
+    /* Engagement */
+    .engagement {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 0; margin-top: 2rem;
-      border-top: 1px solid #e3e2de; border-bottom: 1px solid #e3e2de;
+      padding: 1rem 0; margin-top: 2.5rem;
+      border-top: 1px solid #eee;
     }
-    .post-like-btn {
+    .like-btn {
       display: inline-flex; align-items: center; gap: 0.375rem;
-      background: none; border: 1px solid #e3e2de; border-radius: 20px;
-      padding: 0.375rem 0.875rem; cursor: pointer; font-size: 0.875rem;
-      color: #37352f; transition: all 0.2s; font-family: inherit;
+      background: none; border: 1px solid #e5e5e5; border-radius: 20px;
+      padding: 0.375rem 0.875rem; cursor: pointer; font-size: 0.85rem;
+      color: #555; transition: all 0.2s; font-family: inherit;
     }
-    .post-like-btn:hover { border-color: #e74c3c; color: #e74c3c; background: #fef2f2; }
-    .post-like-btn.liked { border-color: #e74c3c; color: #e74c3c; background: #fef2f2; }
-    .post-like-btn .heart { font-size: 1rem; line-height: 1; }
-    .post-like-count { font-weight: 600; font-size: 0.8125rem; }
-    .post-share-group { display: flex; align-items: center; gap: 0.375rem; }
-    .post-share-btn {
+    .like-btn:hover { border-color: #e74c3c; color: #e74c3c; background: #fef2f2; }
+    .like-btn.liked { border-color: #e74c3c; color: #e74c3c; background: #fef2f2; }
+    .like-btn .heart { font-size: 1rem; line-height: 1; }
+    .like-count { font-weight: 600; font-size: 0.8rem; }
+    .share-group { display: flex; align-items: center; gap: 0.375rem; }
+    .share-btn {
       display: inline-flex; align-items: center; justify-content: center;
       width: 2rem; height: 2rem; border-radius: 50%;
-      border: 1px solid #e3e2de; background: none; cursor: pointer;
-      color: #37352f; transition: all 0.2s; text-decoration: none;
+      border: 1px solid #e5e5e5; background: none; cursor: pointer;
+      color: #555; transition: all 0.2s; text-decoration: none;
     }
-    .post-share-btn svg { width: 14px; height: 14px; fill: currentColor; }
-    .post-share-btn:hover { background: #f7f6f3; border-color: #9b9a97; }
-    .post-share-btn.twitter:hover { background: #e8f5fd; border-color: #1d9bf0; color: #1d9bf0; }
-    .post-share-btn.linkedin:hover { background: #e8f0fe; border-color: #0a66c2; color: #0a66c2; }
-    .post-share-btn.copy:hover { background: #f0fdf4; border-color: #059669; color: #059669; }
-    .copy-toast {
+    .share-btn svg { width: 14px; height: 14px; fill: currentColor; }
+    .share-btn:hover { background: #f6f6f6; border-color: #bbb; }
+    .share-btn.twitter:hover { background: #e8f5fd; border-color: #1d9bf0; color: #1d9bf0; }
+    .share-btn.linkedin:hover { background: #e8f0fe; border-color: #0a66c2; color: #0a66c2; }
+    .share-btn.copy:hover { background: #f0fdf4; border-color: #059669; color: #059669; }
+    .toast {
       position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      background: #37352f; color: #fff; padding: 0.5rem 1rem; border-radius: 6px;
-      font-size: 0.8125rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+      background: #333; color: #fff; padding: 0.5rem 1rem; border-radius: 6px;
+      font-size: 0.8rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;
     }
-    .copy-toast.show { opacity: 1; }
+    .toast.show { opacity: 1; }
   </style>
 </head>
 <body>
   <div class="container">
-    <a class="back" href="/">&larr; Back</a>
+    <a class="back" href="/">&larr; Home</a>
 
-    <!-- Author byline at top — name only -->
-    <div class="post-author-byline">
-      {% if site.author.avatar and site.author.avatar != "" %}
-      <div class="post-author-avatar"><img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" /></div>
-      {% else %}
-      <div class="post-author-avatar">{{ site.author.name | slice: 0 }}</div>
-      {% endif %}
-      <div class="post-author-name">{{ site.author.name | default: site.title }}</div>
+    <div class="byline">
+      <a href="/">{{ site.author.name | default: site.title }}</a>
     </div>
 
     <h1>{{ page.title }}</h1>
@@ -132,19 +118,19 @@
       {{ content }}
     </div>
 
-    <div class="post-engagement">
-      <button class="post-like-btn" id="likeBtn" onclick="handleLike()">
+    <div class="engagement">
+      <button class="like-btn" id="likeBtn" onclick="handleLike()">
         <span class="heart" id="heartIcon">&#9825;</span>
-        <span class="post-like-count" id="likeCount">0</span>
+        <span class="like-count" id="likeCount">0</span>
       </button>
-      <div class="post-share-group">
-        <a class="post-share-btn twitter" id="twitterShare" href="#" target="_blank" rel="noopener" title="Share on X">
+      <div class="share-group">
+        <a class="share-btn twitter" id="twitterShare" href="#" target="_blank" rel="noopener" title="Share on X">
           <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <a class="post-share-btn linkedin" id="linkedinShare" href="#" target="_blank" rel="noopener" title="Share on LinkedIn">
+        <a class="share-btn linkedin" id="linkedinShare" href="#" target="_blank" rel="noopener" title="Share on LinkedIn">
           <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
-        <button class="post-share-btn copy" onclick="copyLink()" title="Copy link">
+        <button class="share-btn copy" onclick="copyLink()" title="Copy link">
           <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
         </button>
       </div>
@@ -152,7 +138,7 @@
 
   </div>
 
-  <div class="copy-toast" id="copyToast">Link copied</div>
+  <div class="toast" id="copyToast">Link copied</div>
 
   <script>
     (function() {
@@ -161,18 +147,15 @@
       var title = document.querySelector('h1').textContent;
       var url = location.href;
 
-      // Share links
       document.getElementById('twitterShare').href =
         'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title + '\n\n' + url);
       document.getElementById('linkedinShare').href =
         'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
 
-      // Page hit
       if (slug) {
         fetch(API + '/trackPageHit?slug=' + encodeURIComponent(slug), { mode: 'no-cors' }).catch(function(){});
       }
 
-      // Likes
       var liked = localStorage.getItem('liked_' + slug);
       if (slug) {
         fetch(API + '/likePost?slug=' + encodeURIComponent(slug))
