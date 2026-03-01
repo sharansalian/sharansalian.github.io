@@ -27,17 +27,14 @@
       font-size: 0.85rem; margin-bottom: 2.5rem; transition: color 0.15s;
     }
     .back:hover { color: #333; }
-    .byline {
-      font-size: 0.85rem; color: #888; margin-bottom: 0.5rem;
-    }
-    .byline a { color: #555; text-decoration: none; font-weight: 500; }
-    .byline a:hover { color: #111; }
     h1 {
       font-size: 1.6rem; font-weight: 600; color: #111;
       letter-spacing: -0.02em; line-height: 1.35;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.375rem;
     }
     .meta { color: #aaa; font-size: 0.8rem; margin-bottom: 2rem; }
+    .meta a { color: #888; text-decoration: none; }
+    .meta a:hover { color: #333; }
     .post-banner {
       width: 100%; max-height: 400px; object-fit: cover;
       border-radius: 6px; margin-bottom: 2rem;
@@ -105,12 +102,8 @@
   <div class="container">
     <a class="back" href="/">&larr; Home</a>
 
-    <div class="byline">
-      <a href="/">{{ site.author.name | default: site.title }}</a>
-    </div>
-
     <h1>{{ page.title }}</h1>
-    <div class="meta">{{ page.date | date: "%B %-d, %Y" }}</div>
+    <div class="meta">{{ page.date | date: "%B %-d, %Y" }} &middot; <a href="/">{{ site.author.name | default: site.title }}</a></div>
     {% if page.image %}
     <img class="post-banner" src="{{ page.image }}" alt="{{ page.title }}" />
     {% endif %}
