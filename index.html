@@ -1,0 +1,57 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharan Salian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Google Sans Text', 'Google Sans', -apple-system, sans-serif;
+      background: #fff; color: #37352f; line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 680px; margin: 0 auto; padding: 3rem 1.5rem; }
+    h1 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 2rem; font-weight: 700; letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+    }
+    .subtitle { color: #787774; font-size: 0.9375rem; margin-bottom: 2.5rem; }
+    .posts { list-style: none; }
+    .posts li { padding: 0.875rem 0; border-bottom: 1px solid #e3e2de; }
+    .posts li:first-child { border-top: 1px solid #e3e2de; }
+    .posts a {
+      text-decoration: none; color: #37352f; font-weight: 500;
+      font-size: 1rem; display: block; transition: color 0.15s;
+    }
+    .posts a:hover { color: #2eaadc; }
+    .posts .date { font-size: 0.8125rem; color: #9b9a97; margin-top: 0.125rem; }
+    .empty { color: #9b9a97; font-size: 0.9375rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sharan Salian</h1>
+    <p class="subtitle">Engineering, AI, and building in public.</p>
+    {% if site.posts.size > 0 %}
+    <ul class="posts">
+      {% for post in site.posts %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <div class="date">{{ post.date | date: "%B %-d, %Y" }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">No posts yet.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
