@@ -1,3 +1,4 @@
+<!-- Updated layout - synced from sharan-os-core -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,21 +33,21 @@
       font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em;
       margin-bottom: 0.25rem;
     }
+    .meta { color: #9b9a97; font-size: 0.8125rem; margin-bottom: 1.5rem; }
     /* Author byline - top of post */
     .post-author-byline {
-      display: flex; align-items: center; gap: 0.625rem;
-      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1.25rem;
     }
     .post-author-avatar {
-      width: 36px; height: 36px; border-radius: 50%; background: #2eaadc;
+      width: 28px; height: 28px; border-radius: 50%; background: #2eaadc;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: #fff; font-size: 0.875rem; flex-shrink: 0;
+      font-weight: 700; color: #fff; font-size: 0.75rem; flex-shrink: 0;
     }
     .post-author-avatar img {
-      width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+      width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
     }
-    .post-author-name { font-weight: 600; font-size: 0.875rem; line-height: 1.2; }
-    .post-author-meta { font-size: 0.75rem; color: #9b9a97; }
+    .post-author-name { font-weight: 600; font-size: 0.875rem; }
     .post-banner {
       width: 100%; max-height: 400px; object-fit: cover;
       border-radius: 8px; margin-bottom: 2rem;
@@ -106,34 +107,24 @@
       font-size: 0.8125rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;
     }
     .copy-toast.show { opacity: 1; }
-    /* Author bio footer */
-    .post-author-footer {
-      display: flex; align-items: flex-start; gap: 0.75rem;
-      margin-top: 2rem; padding: 1.25rem; background: #f7f6f3; border-radius: 8px;
-    }
-    .post-author-footer .post-author-avatar { width: 40px; height: 40px; font-size: 1rem; }
-    .post-author-footer .post-author-avatar img { width: 40px; height: 40px; }
-    .post-author-bio { font-size: 0.8125rem; color: #787774; margin-top: 0.125rem; }
   </style>
 </head>
 <body>
   <div class="container">
     <a class="back" href="/">&larr; Back</a>
 
-    <!-- Author byline at top -->
+    <!-- Author byline at top — name only -->
     <div class="post-author-byline">
       {% if site.author.avatar and site.author.avatar != "" %}
       <div class="post-author-avatar"><img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" /></div>
       {% else %}
       <div class="post-author-avatar">{{ site.author.name | slice: 0 }}</div>
       {% endif %}
-      <div>
-        <div class="post-author-name">{{ site.author.name | default: site.title }}</div>
-        <div class="post-author-meta">{{ page.date | date: "%B %-d, %Y" }}</div>
-      </div>
+      <div class="post-author-name">{{ site.author.name | default: site.title }}</div>
     </div>
 
     <h1>{{ page.title }}</h1>
+    <div class="meta">{{ page.date | date: "%B %-d, %Y" }}</div>
     {% if page.image %}
     <img class="post-banner" src="{{ page.image }}" alt="{{ page.title }}" />
     {% endif %}
@@ -159,19 +150,6 @@
       </div>
     </div>
 
-    {% if site.author.bio %}
-    <div class="post-author-footer">
-      {% if site.author.avatar and site.author.avatar != "" %}
-      <div class="post-author-avatar"><img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" /></div>
-      {% else %}
-      <div class="post-author-avatar">{{ site.author.name | slice: 0 }}</div>
-      {% endif %}
-      <div>
-        <div class="post-author-name">{{ site.author.name | default: site.title }}</div>
-        <div class="post-author-bio">{{ site.author.bio }}</div>
-      </div>
-    </div>
-    {% endif %}
   </div>
 
   <div class="copy-toast" id="copyToast">Link copied</div>
