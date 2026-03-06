@@ -74,8 +74,10 @@ layout: null
     .project-name {
       font-size: 0.95rem; font-weight: 600; color: #111;
       text-decoration: none; transition: color 0.15s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
     }
     .project-name:hover { color: #0969da; }
+    .project-icon { width: 20px; height: 20px; flex-shrink: 0; }
     .project-desc { font-size: 0.85rem; color: #666; margin-top: 0.25rem; }
     .project-meta {
       display: flex; gap: 0.75rem; margin-top: 0.5rem;
@@ -111,7 +113,10 @@ layout: null
     <div class="projects">
       <div class="section-title">Projects</div>
       <div class="project">
-        <a class="project-name" href="https://github.com/sharansalian/pocket" target="_blank" rel="noopener">Pocket</a>
+        <a class="project-name" href="https://github.com/sharansalian/pocket" target="_blank" rel="noopener">
+          <svg class="project-icon" viewBox="0 0 24 24" fill="#ef4056"><path d="M3 3a1 1 0 0 0-1 1v7c0 5.523 4.477 10 10 10s10-4.477 10-10V4a1 1 0 0 0-1-1H3zm4.707 6.293a1 1 0 0 0-1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0-1.414-1.414L12 13.586 7.707 9.293z"/></svg>
+          Pocket
+        </a>
         <p class="project-desc">A revival of the read-later experience. Save articles, distraction-free reader, AI summaries — built entirely from mobile with Claude Code.</p>
         <div class="project-meta">
           <span class="project-tag">React</span>
