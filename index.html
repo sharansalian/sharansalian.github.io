@@ -6,10 +6,20 @@ layout: null
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sharan Salian</title>
+  <title>Sharan Salian — Engineer, Builder, Educator</title>
+  <meta name="description" content="Building Lucid (interactive CS education) and Pocket (AI-powered read-later). Software engineer shipping products in public." />
+  <meta property="og:title" content="Sharan Salian" />
+  <meta property="og:description" content="Building Lucid (interactive CS education) and Pocket (AI-powered read-later)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sharansalian.com" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@sharansalian_" />
+  <meta name="twitter:title" content="Sharan Salian" />
+  <meta name="twitter:description" content="Building Lucid and Pocket. Engineer, builder, educator." />
+  <link rel="canonical" href="https://sharansalian.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -22,7 +32,7 @@ layout: null
     /* Header */
     .header { margin-bottom: 3rem; }
     .header h1 {
-      font-size: 1.5rem; font-weight: 600; color: #111;
+      font-size: 1.5rem; font-weight: 700; color: #111;
       letter-spacing: -0.02em; margin-bottom: 0.25rem;
     }
     .header .tagline {
@@ -30,7 +40,7 @@ layout: null
     }
     .header nav {
       display: flex; align-items: center; gap: 1.25rem;
-      font-size: 0.85rem;
+      font-size: 0.85rem; flex-wrap: wrap;
     }
     .header nav a {
       color: #555; text-decoration: none;
@@ -42,8 +52,66 @@ layout: null
       vertical-align: -2px;
     }
 
+    /* Section */
+    .section-title {
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #aaa; margin-bottom: 1rem;
+    }
+
+    /* Projects */
+    .projects { margin-bottom: 3rem; }
+    .project {
+      border: 1px solid #eee; border-radius: 8px; padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem; transition: border-color 0.15s;
+    }
+    .project:hover { border-color: #ccc; }
+    .project-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .project-name {
+      font-size: 0.95rem; font-weight: 600; color: #111;
+      text-decoration: none; transition: color 0.15s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .project-name:hover { color: #0969da; }
+    .project-icon { width: 20px; height: 20px; flex-shrink: 0; }
+    .project-badge {
+      font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.05em; padding: 0.15rem 0.5rem;
+      border-radius: 4px; white-space: nowrap;
+    }
+    .badge-flagship { background: #dbeafe; color: #1d4ed8; }
+    .badge-live { background: #dcfce7; color: #15803d; }
+    .project-desc { font-size: 0.85rem; color: #666; margin-top: 0.25rem; }
+    .project-meta {
+      display: flex; gap: 0.5rem; margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .project-tag {
+      background: #f3f4f6; color: #555; padding: 0.125rem 0.5rem;
+      border-radius: 4px; font-size: 0.7rem; font-weight: 500;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem; margin-bottom: 3rem;
+    }
+    .stat {
+      text-align: center; padding: 1rem 0.5rem;
+      border: 1px solid #f0f0f0; border-radius: 8px;
+    }
+    .stat-number {
+      font-size: 1.25rem; font-weight: 700; color: #111;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.7rem; color: #999; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-top: 0.125rem;
+    }
+
     /* Posts */
-    .posts { list-style: none; }
+    .posts { list-style: none; margin-bottom: 3rem; }
     .posts li {
       display: flex; align-items: baseline; gap: 1.25rem;
       padding: 0.625rem 0;
@@ -60,67 +128,87 @@ layout: null
     .posts a:hover { color: #0969da; }
     .empty { color: #aaa; font-size: 0.9rem; }
 
-    /* Projects */
-    .section-title {
-      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; color: #aaa; margin-bottom: 1rem;
+    /* Footer */
+    .footer {
+      border-top: 1px solid #f0f0f0; padding-top: 1.5rem;
+      font-size: 0.8rem; color: #bbb; text-align: center;
     }
-    .projects { margin-bottom: 3rem; }
-    .project {
-      border: 1px solid #eee; border-radius: 8px; padding: 1rem 1.25rem;
-      margin-bottom: 0.75rem; transition: border-color 0.15s;
-    }
-    .project:hover { border-color: #ccc; }
-    .project-name {
-      font-size: 0.95rem; font-weight: 600; color: #111;
-      text-decoration: none; transition: color 0.15s;
-      display: inline-flex; align-items: center; gap: 0.4rem;
-    }
-    .project-name:hover { color: #0969da; }
-    .project-icon { width: 20px; height: 20px; flex-shrink: 0; }
-    .project-desc { font-size: 0.85rem; color: #666; margin-top: 0.25rem; }
-    .project-meta {
-      display: flex; gap: 0.75rem; margin-top: 0.5rem;
-      font-size: 0.75rem; color: #aaa;
-    }
-    .project-tag {
-      background: #f3f4f6; color: #555; padding: 0.125rem 0.5rem;
-      border-radius: 4px; font-size: 0.7rem; font-weight: 500;
-    }
+    .footer a { color: #999; text-decoration: none; }
+    .footer a:hover { color: #555; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <h1>Sharan Salian</h1>
-      <p class="tagline">Engineering, AI, and building in public.</p>
+      <p class="tagline">Engineer. Builder. Educator. Making CS education accessible.</p>
       <nav>
-        <a href="https://www.linkedin.com/in/sharan-salian/" target="_blank" rel="noopener" title="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
+        <a href="https://sharansalian.com" title="Website">sharansalian.com</a>
+        <a href="https://x.com/sharansalian_" target="_blank" rel="noopener" title="X (Twitter)">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          @sharansalian_
         </a>
         <a href="https://github.com/sharansalian" target="_blank" rel="noopener" title="GitHub">
           <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
           GitHub
         </a>
-        <a href="https://x.com/sharansalian_" target="_blank" rel="noopener" title="X (Twitter)">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          @sharansalian_
+        <a href="https://www.linkedin.com/in/sharan-salian/" target="_blank" rel="noopener" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
         </a>
       </nav>
     </div>
 
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-number">2</span>
+        <span class="stat-label">Products</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">120+</span>
+        <span class="stat-label">Lessons</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">6</span>
+        <span class="stat-label">CS Tracks</span>
+      </div>
+    </div>
+
     <div class="projects">
-      <div class="section-title">Projects</div>
+      <div class="section-title">Products</div>
+
       <div class="project">
-        <a class="project-name" href="https://github.com/sharansalian/pocket" target="_blank" rel="noopener">
-          <svg class="project-icon" viewBox="0 0 24 24" fill="#ef4056"><path d="M3 3a1 1 0 0 0-1 1v7c0 5.523 4.477 10 10 10s10-4.477 10-10V4a1 1 0 0 0-1-1H3zm4.707 6.293a1 1 0 0 0-1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0-1.414-1.414L12 13.586 7.707 9.293z"/></svg>
-          Pocket
-        </a>
-        <p class="project-desc">A revival of the read-later experience. Save articles, distraction-free reader, AI summaries — built entirely from mobile with Claude Code.</p>
+        <div class="project-header">
+          <a class="project-name" href="https://sharan-os-core.web.app" target="_blank" rel="noopener">
+            <svg class="project-icon" viewBox="0 0 24 24" fill="#6366f1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            Lucid
+          </a>
+          <span class="project-badge badge-flagship">Flagship</span>
+        </div>
+        <p class="project-desc">Interactive CS education — learn fundamentals, system design, and AI/ML through story-driven lessons with hands-on widgets. Brilliant for computer science at 1/4 the price.</p>
         <div class="project-meta">
           <span class="project-tag">React</span>
           <span class="project-tag">Firebase</span>
+          <span class="project-tag">React Native</span>
+          <span class="project-tag">120 Topics</span>
+          <span class="project-tag">Web + iOS + Android</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <a class="project-name" href="https://github.com/sharansalian/pocket" target="_blank" rel="noopener">
+            <svg class="project-icon" viewBox="0 0 24 24" fill="#ef4056"><path d="M3 3a1 1 0 0 0-1 1v7c0 5.523 4.477 10 10 10s10-4.477 10-10V4a1 1 0 0 0-1-1H3zm4.707 6.293a1 1 0 0 0-1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0-1.414-1.414L12 13.586 7.707 9.293z"/></svg>
+            Pocket
+          </a>
+          <span class="project-badge badge-live">Live</span>
+        </div>
+        <p class="project-desc">A revival of the read-later experience. Save articles, distraction-free reader, AI summaries, text-to-speech — built entirely from mobile with Claude Code.</p>
+        <div class="project-meta">
+          <span class="project-tag">React</span>
+          <span class="project-tag">Firebase</span>
+          <span class="project-tag">AI/TTS</span>
+          <span class="project-tag">Chrome Extension</span>
           <span class="project-tag">Open Source</span>
         </div>
       </div>
@@ -139,6 +227,10 @@ layout: null
     {% else %}
     <p class="empty">No posts yet.</p>
     {% endif %}
+
+    <div class="footer">
+      <p>&copy; 2026 Sharan Salian &middot; <a href="https://sharansalian.com">sharansalian.com</a></p>
+    </div>
   </div>
 </body>
 </html>
