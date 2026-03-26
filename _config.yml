@@ -1,10 +1,10 @@
 title: Sharan Salian
-description: Engineering, AI, and building in public.
-url: "https://sharansalian.github.io"
+description: Engineer. Builder. Educator. Building Lucid (interactive CS education) and Pocket (AI-powered read-later).
+url: "https://sharansalian.com"
 markdown: kramdown
 permalink: /:title/
 plugins:
   - jekyll-seo-tag
 author:
   name: Sharan Salian
-  bio: Software engineer building AI tools, studying system design, shipping in public.
+  bio: Building Lucid and Pocket. Making CS education accessible for students and engineers worldwide.
